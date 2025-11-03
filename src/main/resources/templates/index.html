@@ -8,6 +8,15 @@
 
 <h1>My Tasks</h1>
 
+<form th:action="@{/tasks/new}" th:object="${newTask}" method="POST">
+    <label>
+        New Task:
+        <input type="text" th:field="*{description}" placeholder="What needs to be done?" />
+    </label>
+    <button type="submit">Add Task</button>
+</form>
+
+<hr> <h2>All Tasks</h2>
 <ul>
     <li th:each="task : ${tasks}">
         <span th:text="${task.description}"></span>
