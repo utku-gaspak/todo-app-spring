@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>My To-Do App</title>
+</head>
+<body>
+
+<div th:if="${task != null}">
+    <h1>Task Details</h1>
+    <div>
+        <strong>ID:</strong>
+        <span th:text="${task.id}">1</span>
+    </div>
+    <div>
+        <strong>Description:</strong>
+        <span th:text="${task.description}">Task will show up here</span>
+    </div>
+    <div>
+        <strong>Completed:</strong>
+        <span th:text="${task.completed}">false</span>
+    </div>
+</div>
+
+<div th:unless="${task != null}">
+    <h1>Task Not Found</h1>
+    <p>Sorry, a task with that ID does not exist.</p>
+    <a th:href="@{/}">Back to homepage</a>
+</div>
+
+</body>
+</html>

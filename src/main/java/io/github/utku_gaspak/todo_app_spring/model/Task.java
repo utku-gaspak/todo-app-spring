@@ -15,8 +15,8 @@ public class Task {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long ID;
 
-    @Column(name = "task", nullable = false)
-    private String task;
+    @Column(name = "description", nullable = false)
+    private String description;
 
     @Column(name = "completed", columnDefinition = "boolean default false")
     private boolean completed;
