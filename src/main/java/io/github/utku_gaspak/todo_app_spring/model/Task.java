@@ -17,4 +17,7 @@ public class Task {
 
     @Column(name = "task", nullable = false)
     private String task;
+
+    @Column(name = "completed", columnDefinition = "boolean default false")
+    private boolean completed;
 }
