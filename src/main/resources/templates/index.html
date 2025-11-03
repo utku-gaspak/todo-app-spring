@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>My To-Do App</title>
+</head>
+<body>
+
+<h1>My Tasks</h1>
+
+<ul>
+    <li th:each="task : ${tasks}">
+        <span th:text="${task.description}"></span>
+        - (<span th:text="${task.completed}"></span>)
+    </li>
+</ul>
+
+<div th:if="${tasks.isEmpty()}">
+    <p>You have no tasks. Add one!</p>
+</div>
+
+</body>
+</html>
