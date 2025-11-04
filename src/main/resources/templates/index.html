@@ -13,6 +13,10 @@
         New Task:
         <input type="text" th:field="*{description}" placeholder="What needs to be done?" />
     </label>
+    <span style="color: red;"
+          th:if="${#fields != null AND #fields.hasErrors('description')}"
+          th:errors="*{description}">
+    </span>
     <button type="submit">Add Task</button>
 </form>
 

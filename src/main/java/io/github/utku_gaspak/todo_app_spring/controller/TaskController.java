@@ -3,13 +3,13 @@ package io.github.utku_gaspak.todo_app_spring.controller;
 import io.github.utku_gaspak.todo_app_spring.model.Task;
 import io.github.utku_gaspak.todo_app_spring.repository.TaskRepository;
 import io.github.utku_gaspak.todo_app_spring.service.TaskService;
+import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.annotation.*;
 
 @Controller
 @RequiredArgsConstructor
@@ -30,7 +30,18 @@ public class TaskController {
     }
 
     @PostMapping("/tasks/new")
-    public String createTask(@ModelAttribute Task newTask) {
+    public String createTask(@Valid @ModelAttribute("newTask") Task newTask, BindingResult bindingResult, Model model) {
+        if (bindingResult.hasErrors()){
+            // VALIDATION FAILED:
+
+            //    MUST re-add the 'tasks' list, or your th:each loop
+            //    in index.html will crash with a NullPointerException.
+            model.addAttribute("tasks", taskService.getAllTasks());
+            return "index";
+        }
+        //    Now, return "index". Spring will automatically re-send
+        //    the 'newTask' (with the user's bad data) and the
+        //    'bindingResult' (with the errors) to the page.
         taskService.createNewTask(newTask);
         return "redirect:/";
     }
