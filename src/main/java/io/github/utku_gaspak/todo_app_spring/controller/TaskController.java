@@ -35,4 +35,24 @@ public class TaskController {
         return "redirect:/";
     }
 
+    @GetMapping("/tasks/edit/{id}")
+    public String viewEditTask(@PathVariable long id, Model model){
+        var task = taskService.getTaskById(id);
+        if (task != null) {
+            model.addAttribute("task", taskService.getTaskById(id));
+            return "edit-task";}
+        return "redirect:/";
+    }
+
+    @PostMapping("/tasks/edit/{id}")
+    public String editTask(@ModelAttribute Task task){
+        taskService.saveTask(task);
+        return "redirect:/";
+    }
+
+    @PostMapping("/tasks/toggle/{id}")
+    public String toggleTaskCompleted(@PathVariable long id){
+        taskService.toggleTask(id);
+        return "redirect:/";
+    }
 }
