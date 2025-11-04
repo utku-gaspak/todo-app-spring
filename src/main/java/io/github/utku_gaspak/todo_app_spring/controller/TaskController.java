@@ -55,4 +55,10 @@ public class TaskController {
         taskService.toggleTask(id);
         return "redirect:/";
     }
+
+    @PostMapping("/tasks/delete/{id}")
+    public String deleteTask(@PathVariable long id){
+        taskService.deleteTask(id);
+        return "redirect:/";
+    }
 }

@@ -30,9 +30,11 @@
               th:style="${task.completed} ? 'text-decoration: line-through;' : ''">
               Task description
         </span>
-
         <a th:href="@{/tasks/{id}(id=${task.id})}">Details</a>
         <a th:href="@{/tasks/edit/{id}(id=${task.id})}">Edit</a>
+            <form th:action="@{/tasks/delete/{id}(id=${task.id})}" method="POST" style="display: inline;">
+                <button type="submit">Delete</button>
+            </form>
     </li>
 </ul>
 
